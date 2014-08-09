@@ -2,18 +2,8 @@ App.controller('home', function (page) {
 	// put stuff here
 	$(page).find("#search-button").on("click", function () {
 		console.log("clicked");
-		/*App.dialog({
-		  title        : 'Network Error',
-		  text         : 'Looks like the connection is flaky. Try again in a bit',
-		  okButton     : 'Try Again',
-		  cancelButton : 'Cancel'
-		}, function (tryAgain) {
-		  if (tryAgain) {
-			// try again
-		  }
-		});*/
 		$.ajax({
-			url: "http://urbanscraper.herokuapp.com/define/"+$(page).find("#search-bar").val()+"?callback=null",
+			url: "http://urbanscraper.herokuapp.com/search/"+$(page).find("#search-bar").val().replace(" ","+")+"?callback=null",
 			// the name of the callback parameter, as specified by the YQL service
 			jsonp: "callback",
 
@@ -21,8 +11,21 @@ App.controller('home', function (page) {
 			dataType: "jsonp",
 			success: function (data)
 			{
-				console.log(data);
-				App.load('definition', {def: data, frommessage: false});
+				data = data[0];
+				if (data != null)
+				{
+					data.term = data.term.replace("+"," ");
+					console.log(data);
+					App.load('definition', {def: data, frommessage: false});
+				}
+				else
+				{
+					App.dialog({
+					  title        : 'Term not found!',
+					  text         : 'Looks like the term "'+$(page).find("#search-bar").val()+'" was not found. Sorry about that.',
+					  okButton 	: 'Ok'
+					});
+				}
 			}
 		});
 	});
