@@ -7,7 +7,7 @@ App.controller('definition', function (page, def) {
 		this.restorable = false;
 	}
 	$(page).find(".app-title").html("Definition: "+definition.term);
-	var deftext = "<b>"+definition.term+"</b><br><p>"+definition.definition+"</p><br><i>Example: </i><p>"+definition.example+"</p><br><div class=\"app-button\" onclick=\"kik.open('"+definition.url+"', true);\">Link to UrbanDictionary.com</div>";
+	var deftext = "<b>"+definition.term+"</b><br><p>"+definition.definition+"</p><br><i>Example: </i><p>"+definition.example+"</p><br><div class=\"app-button\" onclick=\"kik.open('"+definition.url+"', true);\">Link to UrbanDictionary.com</div><div class='app-button' id='share-button'>Share</div>";
 	$(page).find("#definition-section").html(deftext);
 	$(page).find("#share-button").on("click", function () {
 		kik.send({
