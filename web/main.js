@@ -6,7 +6,7 @@
 		} catch (err) {
 			App.load('home');
 		}
-		App.load('definition', kik.message);
+		App.load('definition', {def: kik.message, frommessage: true});
 		return;
 	}
 	try {

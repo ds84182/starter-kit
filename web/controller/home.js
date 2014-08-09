@@ -22,7 +22,7 @@ App.controller('home', function (page) {
 			success: function (data)
 			{
 				console.log(data);
-				App.load('definition', data);
+				App.load('definition', {def: data, frommessage: false});
 			}
 		});
 	});
